@@ -26,6 +26,7 @@
             data : {wid:wid},
             dataType : "json",
             type : "POST",
+            jsonp: "7days",
             success : function(res){
                 $.hideLoading();
                 if(res.errCode == 1){
