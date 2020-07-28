@@ -24,7 +24,8 @@
         $.ajax({
             url : "//www.ym002.cn/api/web/",
             data : {wid:wid},
-            dataType : "json",
+            dataType : "jsonp",
+            async : true,
             type : "POST",
             jsonp: "7days",
             success : function(res){
