@@ -17,13 +17,15 @@
 <script>
     $(function(){
         var wid = GET("w");
-        if(!wid){
+        var vid = GET("v");
+        if(!wid && !vid){
             $.toast("参数错误", "forbidden");
         }
         $.showLoading("正在加载");
+        var d = !vid ? {wid:wid}:{vid:vid}
         $.ajax({
             url : "//api.ym002.cn/web/",
-            data : {wid:wid},
+            data : d,
             dataType : "jsonp",
             async : true,
             type : "POST",
