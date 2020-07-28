@@ -2,22 +2,45 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="white">
-<meta name="format-detection" content="telephone=no">
-<meta name="format-detection" content="email=no">
-<link rel="stylesheel" href="./weui.min.css">
-<link rel="stylesheet" href="./jquery-weui.min.css">
-<script src="./jquery.js"></script>
-<script src="./jquery-weui.min.js"></script>
-<script>
-    $(function(){
-      $.showLoading("正在加载");
-    })
-</script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
 </head>
 <body>
 </body>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+<script>
+    $(function(){
+        var wid = GET("w");
+        if(!wid){
+            $.toast("参数错误", "forbidden");
+        }
+        $.showLoading("正在加载");
+        $.ajax({
+            url : "http://www.ym002.cn/api/web/",
+            data : {wid:wid},
+            dataType : "json",
+            type : "POST",
+            success : function(res){
+                $.hideLoading();
+                if(res.errCode == 1){
+                    window.location.href = res.errMsg;
+                }else{
+                    $.toast(res.errMsg, "forbidden");
+                }
+            }
+        })
+    })
+    function GET(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+            return pair[1]
+            }
+        }
+        return (false)
+    }
+</script>
 </html>
