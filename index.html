@@ -21,7 +21,7 @@
             $.toast("参数错误", "forbidden");
         }
         $.showLoading("正在加载");
-        $.getJSON("http://www.ym002.cn/api/web/wid/" + wid,function(res){
+        $.getJSON("//www.ym002.cn/api/web/wid/" + wid,function(res){
             $.hideLoading();
             if(res.errCode == 1){
                 window.location.href = res.errMsg;
